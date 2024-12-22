@@ -3,8 +3,9 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/a', component: () => import('src/pages/HandleDirectory.vue') },
+      { path: '', component: () => import('src/pages/SingleFile.vue') },
+      { path: '/MultiFile', component: () => import('src/pages/MultiFile.vue') },
+      { path: '/DirectoryFile', component: () => import('src/pages/DirectoryFile.vue') },
     ],
   },
   // Always leave this as last one,

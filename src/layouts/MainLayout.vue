@@ -2,80 +2,60 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
         <q-toolbar-title> Morse Code Hacker Only </q-toolbar-title>
 
         <div>A__A</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
+    <q-page-container style="width: 80%; margin: 0 auto">
+      <div class="button-group">
+        <button class="nav-button" @click="navigateTo('/')">單一檔案</button>
+        <button class="nav-button" @click="navigateTo('/MultiFile')">多個檔案</button>
+        <button class="nav-button" @click="navigateTo('/DirectoryFile')">目錄</button>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-]
+const router = useRouter()
 
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+const navigateTo = (path) => {
+  router.push(path)
 }
 </script>
+
+<style>
+button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.button-group {
+  display: flex;
+  justify-content: space-between; /* 分散按鈕 */
+  gap: 20px; /* 按鈕間距 */
+  flex-wrap: wrap; /* 當按鈕寬度超出父容器時換行 */
+}
+.nav-button {
+  flex: 0.5 1 auto; /* 使按鈕等比例分布 */
+  text-align: center;
+  margin: 30px 0 0;
+  padding: 10px 20px;
+  background-color: #0e4a85;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.nav-button:hover {
+  background-color: #2166ab;
+}
+</style>
