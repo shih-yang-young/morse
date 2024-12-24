@@ -3,7 +3,7 @@
     <div style="width: 400px">
       <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-md" />
 
-      <h5>加密</h5>
+      <h5>單一檔案加密</h5>
       <div class="button-group">
         <button class="action-button" @click="handleFileOperation('encryptDES', 'DES 加密')">
           DES 加密
@@ -12,7 +12,7 @@
           AES 加密
         </button>
       </div>
-      <h5>解密</h5>
+      <h5>單一檔案解密</h5>
       <div class="button-group">
         <button class="action-button" @click="handleFileOperation('decryptDES', 'DES 解密')">
           DES 解密

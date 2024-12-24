@@ -1,0 +1,43 @@
+async function encryptGCM(plaintext, key) {
+  const iv = crypto.getRandomValues(new Uint8Array(12)) // GCM 建議 12 字節 IV
+  const encodedText = new TextEncoder().encode(plaintext)
+
+  const encrypted = await crypto.subtle.encrypt(
+    {
+      name: 'AES-GCM',
+      iv: iv,
+    },
+    key,
+    encodedText,
+  )
+
+  return { encrypted: new Uint8Array(encrypted), iv }
+}
+
+async function decryptGCM(ciphertext, iv, key) {
+  const decrypted = await crypto.subtle.decrypt(
+    {
+      name: 'AES-GCM',
+      iv: iv,
+    },
+    key,
+    ciphertext,
+  )
+
+  return new TextDecoder().decode(decrypted)
+}
+
+// 測試
+;(async () => {
+  const key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, [
+    'encrypt',
+    'decrypt',
+  ])
+
+  const plaintext = 'Hello, Web Crypto!'
+  const { encrypted, iv } = await encryptGCM(plaintext, key)
+  console.log('Encrypted:', encrypted)
+
+  const decrypted = await decryptGCM(encrypted, iv, key)
+  console.log('Decrypted:', decrypted)
+})()

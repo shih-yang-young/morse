@@ -10,7 +10,7 @@
 
     <q-page-container style="width: 80%; margin: 0 auto">
       <div class="button-group">
-        <button class="nav-button" @click="navigateTo('/')">單一檔案</button>
+        <button class="nav-button" @click="navigateTo('/SingleFile')">單一檔案</button>
         <button class="nav-button" @click="navigateTo('/MultiFile')">多個檔案</button>
         <button class="nav-button" @click="navigateTo('/DirectoryFile')">目錄</button>
       </div>
