@@ -2,6 +2,7 @@
   <q-page class="flex flex-center" style="margin-top: 50px">
     <div style="width: 400px">
       <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-md" />
+      <q-select filled v-model="mode" :options="options" label="加密模式" class="q-mb-sm" />
 
       <h5>多檔案加密</h5>
       <div class="button-group">
@@ -51,6 +52,9 @@ import { encryptAES, decryptAES, encryptDES, decryptDES } from 'src/utils/crypto
 const key = ref('')
 const processedFiles = ref([])
 
+const mode = ref(null)
+const options = ['ECB', 'CBC', 'CFB', 'OFB']
+
 const operations = {
   encryptDES: encryptDES,
   decryptDES: decryptDES,
@@ -78,10 +82,14 @@ const handleMultipleFileOperation = async (operation, operationName) => {
         alert(`無效的操作: ${operationName}`)
         return
       }
-
-      const result = process(content, key.value)
+      const result = ref('')
+      if (!mode.value) {
+        result.value = process(content, key.value)
+      } else {
+        result.value = process(content, key.value, mode.value)
+      }
       const writable = await handle.createWritable()
-      await writable.write(result)
+      await writable.write(result.value)
       await writable.close()
 
       processedFiles.value.push(`${file.name} 已完成${operationName}`)
@@ -95,50 +103,4 @@ const handleMultipleFileOperation = async (operation, operationName) => {
 }
 </script>
 
-<style>
-button {
-  padding: 10px 20px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #358a6e;
-}
-.button-group {
-  display: flex;
-  justify-content: space-between; /* 分散按鈕 */
-  gap: 20px; /* 按鈕間距 */
-  flex-wrap: wrap; /* 當按鈕寬度超出父容器時換行 */
-}
-.action-button {
-  flex: 1 1 auto; /* 使按鈕等比例分布 */
-  text-align: center;
-  margin: 10px 0;
-  padding: 10px 20px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-.action-button:hover {
-  background-color: #358a6e;
-}
-.result-box {
-  background-color: #f0f0f0;
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  word-wrap: break-word;
-  overflow: auto;
-  height: 300px;
-  list-style-type: none;
-}
-.result-box li {
-  margin-bottom: 5px;
-}
-</style>
+<style></style>

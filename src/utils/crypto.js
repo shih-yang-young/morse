@@ -21,6 +21,7 @@ function getConfig(mode) {
 
 // DES 加密
 export function encryptDES(plaintext, key, mode = 'ECB') {
+  console.log('i am mode', mode)
   const cfg = getConfig(mode)
   return CryptoJS.DES.encrypt(plaintext, CryptoJS.enc.Utf8.parse(key), cfg).toString()
 }

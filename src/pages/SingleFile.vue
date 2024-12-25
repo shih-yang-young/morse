@@ -1,8 +1,8 @@
 <template>
   <q-page class="flex flex-center" style="margin-top: 50px">
     <div style="width: 400px">
-      <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-md" />
-      <q-select filled v-model="mode" :options="options" label="加密模式" style="width: 250px" />
+      <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-sm" />
+      <q-select filled v-model="mode" :options="options" label="加密模式" class="q-mb-sm" />
       <h5>單一檔案加密</h5>
       <div class="button-group">
         <button class="action-button" @click="handleFileOperation('encryptDES', 'DES 加密')">
@@ -63,8 +63,11 @@ const handleFileOperation = async (operation, operationName) => {
       alert(`無效的操作: ${operationName}`)
       return
     }
-
-    encrypted.value = process(content, key.value)
+    if (!mode.value) {
+      encrypted.value = process(content, key.value)
+    } else {
+      encrypted.value = process(content, key.value, mode.value)
+    }
     console.log('result', encrypted.value)
 
     const writable = await handle.createWritable()
@@ -78,33 +81,4 @@ const handleFileOperation = async (operation, operationName) => {
 }
 </script>
 
-<style>
-h5 {
-  margin: 5px; /* 調整按鈕上下間距減小 */
-}
-
-.action-button:hover {
-  background-color: #358a6e;
-}
-.result-box {
-  background-color: #f0f0f0;
-  height: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  word-wrap: break-word;
-  overflow: auto;
-}
-.action-button {
-  flex: 0.5 1 auto; /* 使按鈕等比例分布 */
-  text-align: center;
-  margin: 30px 0;
-  padding: 10px 20px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-</style>
+<style></style>

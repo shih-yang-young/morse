@@ -42,4 +42,35 @@ button {
   gap: 20px; /* 按鈕間距 */
   flex-wrap: wrap; /* 當按鈕寬度超出父容器時換行 */
 }
+h5 {
+  margin: 5px; /* 調整按鈕上下間距減小 */
+}
+
+.action-button:hover {
+  background-color: #358a6e;
+}
+.result-box {
+  background-color: #f0f0f0;
+  height: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  overflow: auto;
+}
+.result-box li {
+  margin-bottom: 5px;
+}
+.action-button {
+  flex: 0.5 1 auto; /* 使按鈕等比例分布 */
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
 </style>
