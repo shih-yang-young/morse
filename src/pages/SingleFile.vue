@@ -1,8 +1,8 @@
 <template>
-  <q-page class="flex flex-center" style="margin-top: 1px">
+  <q-page class="flex flex-center" style="margin-top: 50px">
     <div style="width: 400px">
       <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-md" />
-
+      <q-select filled v-model="mode" :options="options" label="加密模式" style="width: 250px" />
       <h5>單一檔案加密</h5>
       <div class="button-group">
         <button class="action-button" @click="handleFileOperation('encryptDES', 'DES 加密')">
@@ -36,6 +36,9 @@ import { encryptAES, decryptAES, encryptDES, decryptDES } from 'src/utils/crypto
 
 const key = ref('')
 const encrypted = ref('')
+
+const mode = ref(null)
+const options = ['ECB', 'CBC', 'CFB', 'OFB']
 
 const operations = {
   encryptDES: encryptDES,

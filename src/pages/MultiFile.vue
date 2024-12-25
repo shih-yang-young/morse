@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center" style="margin-top: 1px">
+  <q-page class="flex flex-center" style="margin-top: 50px">
     <div style="width: 400px">
       <q-input filled v-model="key" label="輸入加密金鑰" class="q-mb-md" />
 
