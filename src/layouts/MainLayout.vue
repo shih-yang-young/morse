@@ -7,6 +7,11 @@
             <q-tab name="singleFile" @click="navigateTo('/SingleFile')" label="單一檔案"></q-tab>
             <q-tab name="multiFile" @click="navigateTo('/MultiFile')" label="多個檔案"></q-tab>
             <q-tab name="directoryFile" @click="navigateTo('/DirectoryFile')" label="目錄"></q-tab>
+            <q-tab
+              name="exhaustiveAttack"
+              @click="navigateTo('/ExhaustiveAttack')"
+              label="暴力破解"
+            ></q-tab>
           </q-tabs>
         </div>
       </q-toolbar>
@@ -39,6 +44,11 @@ button {
 .button-group {
   display: flex;
   justify-content: space-between; /* 分散按鈕 */
+  gap: 20px; /* 按鈕間距 */
+  flex-wrap: wrap; /* 當按鈕寬度超出父容器時換行 */
+}
+.attack-btn {
+  display: flex;
   gap: 20px; /* 按鈕間距 */
   flex-wrap: wrap; /* 當按鈕寬度超出父容器時換行 */
 }

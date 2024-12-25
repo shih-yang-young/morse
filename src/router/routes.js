@@ -7,6 +7,7 @@ const routes = [
       { path: '/SingleFile', component: () => import('src/pages/SingleFile.vue') },
       { path: '/MultiFile', component: () => import('src/pages/MultiFile.vue') },
       { path: '/DirectoryFile', component: () => import('src/pages/DirectoryFile.vue') },
+      { path: '/ExhaustiveAttack', component: () => import('src/pages/ExhaustiveAttack.vue') },
     ],
   },
   {
