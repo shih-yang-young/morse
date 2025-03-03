@@ -110,7 +110,7 @@ const bruteForceDecrypt = async (algorithm) => {
 
         if (isAnswer(result)) {
           decrypted.value = result
-          log.value += `找到密鑰：${key}\n`
+          log.value += `找到密鑰：z${key}\n`
           break outerLoop
         }
         // eslint-disable-next-line no-unused-vars
